@@ -1,0 +1,44 @@
+<?php
+	include "db.php";
+
+	$rs = pg_query($db, "select * from student;");
+?>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<body style="height: 100%; margin: 0; background-image: url(../images/admin-background.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+<table width='80%' style='background:powderblue;' align='center'>
+<tr>
+	<td align='center' colspan=7><a href='admin_home.php'><img src='images/home1.png'/></a></td>
+</tr>
+<?php
+	if($row=pg_fetch_row($rs))
+	{
+?>
+<tr>	
+	<td><b>Id</b></td>
+	<td><b>First Name</b></td>
+	<td><b>Last Name</b></td>
+	<td><b>User Name</b></td>
+	<td><b>Gender</b></td>
+	<td><b>DOB</b></td>
+	<td><b>Email</b></td>
+	<td><b>Phone</b></td>
+		<td>Status</td>
+</tr>
+<?php
+	do
+	{
+?>
+<tr>
+	<td><?php echo $row[0]?></td>
+	<td><?php echo $row[1]?></td>
+	<td><?php echo $row[2]?></td>
+	<td><?php echo $row[3]?></td>
+	<td><?php echo $row[4]?></td>
+	<td><?php echo $row[5]?></td>
+	<td><?php echo $row[6]?></td>
+	<td><?php echo $row[7]?></td>	
+	<td><a href="activate_student1.php?id=<?php echo $row[0]?> & status=<?php echo $row[11]?>" ><?php echo $row[11]==0 ? 'Activate':'Deactivate'?></a></td></tr>
+<?php
+	}while($row=pg_fetch_row($rs));
+}
+?><</table>

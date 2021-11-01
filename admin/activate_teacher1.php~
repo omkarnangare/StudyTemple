@@ -1,0 +1,12 @@
+<?php
+	include "../db.php";
+
+	$id = $_GET['id'];
+	$status = $_GET['status'];
+	
+	$status = $status==0?1:0;
+
+	pg_query($db, "update teacher set teacher_status = $status where tid=$id");
+
+	header("Location: activate_teacher.php");
+?>
